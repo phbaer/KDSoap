@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2010-2015 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
+** Copyright (C) 2010-2016 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
 ** All rights reserved.
 **
 ** This file is part of the KD Soap library.
@@ -47,7 +47,14 @@ public:
     }
     virtual bool setResourceValue( const TNS__WSResourceValueEnvelope& parameter4 ) {
         Q_ASSERT(parameter4.typeString() == "enum");
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wtautological-undefined-compare"
+#endif
         Q_ASSERT(&parameter4.value() != 0);
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
         const KDSoapValue value = parameter4.value_as_kdsoap_value();
 

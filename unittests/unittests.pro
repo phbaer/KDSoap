@@ -25,6 +25,7 @@ SUBDIRS = \
   optionaltype_regular \
   optionaltype_pointer \
   enum_escape \
+  clearbooks \
   soap12 \
   literal_true_false \
   import_definition \
@@ -33,6 +34,8 @@ SUBDIRS = \
   onvif_ptz \
   encapsecurity \
   prefix_wsdl \
+  vidyo \
+  ws_addressing_support
 
 # These need internet access
 SUBDIRS += webcalls webcalls_wsdl

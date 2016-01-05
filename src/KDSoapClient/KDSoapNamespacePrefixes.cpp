@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2010-2015 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
+** Copyright (C) 2010-2016 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
 ** All rights reserved.
 **
 ** This file is part of the KD Soap library.
@@ -25,7 +25,8 @@
 #include "KDSoapNamespaceManager.h"
 
 void KDSoapNamespacePrefixes::writeStandardNamespaces(QXmlStreamWriter& writer,
-                                                      KDSoapClientInterface::SoapVersion version)
+                                                      KDSoapClientInterface::SoapVersion version,
+                                                      bool messageAddressingEnabled)
 {
     if (version == KDSoapClientInterface::SOAP1_1) {
         writeNamespace(writer, KDSoapNamespaceManager::soapEnvelope(), QLatin1String("soap"));
@@ -37,6 +38,10 @@ void KDSoapNamespacePrefixes::writeStandardNamespaces(QXmlStreamWriter& writer,
 
     writeNamespace(writer, KDSoapNamespaceManager::xmlSchema2001(), QLatin1String("xsd"));
     writeNamespace(writer, KDSoapNamespaceManager::xmlSchemaInstance2001(), QLatin1String("xsi"));
+
+    if (messageAddressingEnabled) {
+        writeNamespace(writer, KDSoapNamespaceManager::soapMessageAddressing(), QLatin1String("wsa"));
+    }
 
     // Also insert known variants
     insert(KDSoapNamespaceManager::xmlSchema1999(), QString::fromLatin1("xsd"));

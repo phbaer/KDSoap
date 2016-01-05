@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2010-2015 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
+** Copyright (C) 2010-2016 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
 ** All rights reserved.
 **
 ** This file is part of the KD Soap library.
@@ -87,7 +87,7 @@ public:
      */
     explicit KDSoapClientInterface(const QString& endPoint, const QString& messageNamespace);
     /**
-     * Destroy the object interface and frees up any resource used.
+     * Destroys the object interface and frees up any resource used.
      * \warning Any running asynchronous calls will be canceled.
      */
     ~KDSoapClientInterface();

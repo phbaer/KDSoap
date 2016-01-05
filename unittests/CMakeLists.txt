@@ -25,7 +25,7 @@ macro(add_unittest _source)
   add_executable(${_name} ${_source} ${_test})
 
   add_test(NAME kdsoap-${_name} COMMAND ${_name})
-  target_link_libraries(${_name} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_LIBRARIES} kdsoap testtools)
+  target_link_libraries(${_name} ${QT_QTCORE_LIBRARY} ${QT_LIBRARIES} kdsoap testtools)
   if(EXTRA_LIBS)
     target_link_libraries(${_name} ${EXTRA_LIBS} )
   endif(EXTRA_LIBS)
@@ -49,6 +49,7 @@ add_subdirectory(dwservice_wsdl)
 add_subdirectory(dwservice_12_wsdl)
 add_subdirectory(dwservice_combined_wsdl)
 add_subdirectory(tech3356_wsdl)
+add_subdirectory(clearbooks)
 add_subdirectory(empty_response_wsdl)
 add_subdirectory(element_ns_wsdl)
 add_subdirectory(specialchars_wsdl)
@@ -63,6 +64,8 @@ add_subdirectory(onvif.org)
 add_subdirectory(onvif_ptz)
 add_subdirectory(encapsecurity)
 add_subdirectory(prefix_wsdl)
+add_subdirectory(vidyo)
+add_subdirectory(ws_addressing_support)
 
 # These need internet access
 add_subdirectory(webcalls)
@@ -70,5 +73,3 @@ add_subdirectory(webcalls_wsdl)
 
 # TODO: If boost optional is installed
 #add_subdirectory(optionaltype_boost_optional)
-
-

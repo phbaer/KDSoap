@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2010-2015 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
+** Copyright (C) 2010-2016 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
 ** All rights reserved.
 **
 ** This file is part of the KD Soap library.
@@ -64,4 +64,9 @@ QString KDSoapNamespaceManager::soapEncoding()
 QString KDSoapNamespaceManager::soapEncoding200305()
 {
     return QString::fromLatin1("http://www.w3.org/2003/05/soap-encoding");
+}
+
+QString KDSoapNamespaceManager::soapMessageAddressing()
+{
+    return QString::fromLatin1("http://www.w3.org/2005/08/addressing");
 }

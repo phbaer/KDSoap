@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2010-2015 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
+** Copyright (C) 2010-2016 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com.
 ** All rights reserved.
 **
 ** This file is part of the KD Soap library.
@@ -32,11 +32,13 @@ class KDSoapMessageData : public QSharedData
 {
 public:
     KDSoapMessageData()
-        : use(KDSoapMessage::LiteralUse), isFault(false)
+        : use(KDSoapMessage::LiteralUse), isFault(false), hasMessageAddressingProperties(false)
     {}
 
     KDSoapMessage::Use use;
     bool isFault;
+    bool hasMessageAddressingProperties;
+    KDSoapMessageAddressingProperties messageAddressingProperties;
 };
 
 KDSoapMessage::KDSoapMessage()
@@ -131,6 +133,22 @@ QString KDSoapMessage::faultAsString() const
 void KDSoapMessage::setFault(bool fault)
 {
     d->isFault = fault;
+}
+
+KDSoapMessageAddressingProperties KDSoapMessage::messageAddressingProperties() const
+{
+    return d->messageAddressingProperties;
+}
+
+void KDSoapMessage::setMessageAddressingProperties(const KDSoapMessageAddressingProperties &map)
+{
+    d->messageAddressingProperties = map;
+    d->hasMessageAddressingProperties = true;
+}
+
+bool KDSoapMessage::hasMessageAddressingProperties() const
+{
+    return d->hasMessageAddressingProperties;
 }
 
 KDSoapMessage::Use KDSoapMessage::use() const

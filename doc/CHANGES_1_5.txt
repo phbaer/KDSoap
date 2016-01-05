@@ -4,7 +4,7 @@ General:
 
 Client-side:
 ============
-*
+* Add WS Addressing Support
 
 Server-side:
 ============
@@ -49,4 +49,10 @@ WSDL parser / code generator changes, applying to both client and server side:
   of finding the right elements in the reply.
 
 * Add missing builtin type xsd:QName.
+
+* Fix erroneous "class qint64;" declaration in generated code for wsdl:arrayType="xsd:integer[]"
+
+* Fix elements being incorrectly-marked-as-nil when copying generated classes (issue72).
+
+* Ignore leading/trailing space in definition of soapAction.
 

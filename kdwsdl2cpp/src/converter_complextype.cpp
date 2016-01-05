@@ -144,7 +144,9 @@ void Converter::convertComplexType( const XSD::ComplexType *type )
                     arrayTypeName = pointerStorageType( arrayTypeName );
                 //qDebug() << "array of" << attribute.arrayType() << "->" << arrayTypeName;
                 typeName = listTypeFor(arrayTypeName, newClass);
-                newClass.addInclude(QString(), arrayTypeName); // add forward declaration
+                if (!mTypeMap.isBasicType(type->arrayType())) {
+                    newClass.addInclude(QString(), arrayTypeName); // add forward declaration
+                }
                 newClass.addHeaderIncludes( QStringList() << QLatin1String("QtCore/QList") );
                 inputTypeName = QLatin1String("const ") + typeName + QLatin1Char('&');
                 isList = true;
@@ -365,15 +367,13 @@ KODE::Code Converter::demarshalVarHelper( const QName& type, const QName& elemen
         code += variableName + QLatin1String(" = ") + soapValueVarName + QLatin1String(";") + COMMENT;
     } else if ( mTypeMap.isBuiltinType( type, elementType ) ) {
         code += variableName + QLatin1String(" = ") + mTypeMap.deserializeBuiltin(type, elementType, soapValueVarName + QLatin1String(".value()"), qtTypeName) + QLatin1String(";") + COMMENT;
-        if ( optional )
-            code += variableName + QLatin1String("_nil = false;") + COMMENT;
     } else if ( mTypeMap.isComplexType( type, elementType ) ) {
         code += variableName + QLatin1String(".deserialize(") + soapValueVarName + QLatin1String(");") + COMMENT;
     } else {
         code += variableName + QLatin1String(".deserialize(") + soapValueVarName + QLatin1String(".value());" ) + COMMENT;
-        if ( optional )
-            code += variableName + QLatin1String("_nil = false;") + COMMENT;
     }
+    if ( optional )
+        code += variableName + QLatin1String("_nil = false;") + COMMENT;
     return code;
 }
 
