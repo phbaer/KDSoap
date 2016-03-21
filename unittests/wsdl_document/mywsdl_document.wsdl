@@ -69,6 +69,7 @@
             </sequence>
           </sequence>
           <attribute name="type" type="kdab:EmployeeTypeEnum"/>
+          <attribute name="weakType"/> <!-- test for attribute without type -->
         </complexType>
       </element>
       <complexType name="EmployeeAchievement">
@@ -104,6 +105,27 @@
         </sequence>
        </complexType>
 
+       <complexType name="TestRepeatedChildren">
+          <choice minOccurs="0">
+            <sequence>
+              <element maxOccurs="1" minOccurs="1" name="low" type="xsd:int"/>
+              <choice minOccurs="0">
+                <element maxOccurs="1" minOccurs="0" name="width" type="xsd:int"/>
+                <element maxOccurs="1" minOccurs="0" name="high" type="xsd:int"/>
+              </choice>
+            </sequence>
+            <element maxOccurs="1" minOccurs="1" name="high" type="xsd:int"/>
+            <sequence>
+              <element maxOccurs="1" minOccurs="1" name="width" type="xsd:int"/>
+              <element maxOccurs="1" minOccurs="0" name="high" type="xsd:int"/>
+            </sequence>
+            <sequence>
+              <element maxOccurs="1" minOccurs="1" name="center" type="xsd:int"/>
+              <element maxOccurs="1" minOccurs="0" name="width" type="xsd:int"/>
+            </sequence>
+          </choice>
+      </complexType>
+
       <element name="elementWithoutType"/> <!-- test that this is ok  -->
 
       <element name="addEmployee" type="kdab:AddEmployee"/>
@@ -114,6 +136,7 @@
         <complexType>
           <sequence>
             <element name='employeeName' type='kdab:EmployeeName'/>
+            <element name='repeatedChildren' type='kdab:TestRepeatedChildren'/>
           </sequence>
         </complexType>
       </element>
@@ -153,6 +176,7 @@
           </sequence>
         </complexType>
       </element>
+
       <element name="SessionElement">
         <complexType>
           <sequence>
@@ -160,6 +184,7 @@
           </sequence>
         </complexType>
       </element>
+
     </xsd:schema>
   </types>
   <message name='addEmployee'>
@@ -261,7 +286,7 @@
       <input message='kdab:sendTelegramRequest' />
       <output message='kdab:sendTelegramResponse' />
     </operation>
-    <operation name='heartbeat'> <!-- One way operation -->
+    <operation name='heart-beat'> <!-- One way operation -->
       <input message='kdab:heartbeatRequest' />
     </operation>
   </portType>

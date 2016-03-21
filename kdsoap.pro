@@ -54,7 +54,7 @@ equals( KDSOAP_INSTALL_PREFIX, $$DEFAULT_INSTALL_PREFIX ){
     unix:message( "No install prefix given, using default of" $$DEFAULT_INSTALL_PREFIX (use configure.sh -prefix DIR to specify))
     !unix:message( "No install prefix given, using default of" $$DEFAULT_INSTALL_PREFIX (use configure -prefix DIR to specify))
 } else {
-    INSTALL_PREFIX=\"$$KDSOAP_INSTALL_PREFIX\"
+    INSTALL_PREFIX=$$KDSOAP_INSTALL_PREFIX
 }
 
 DEBUG_SUFFIX=""
@@ -64,8 +64,8 @@ CONFIG(debug, debug|release) {
 }
 !unix:!mac:!staticlib:VERSION_SUFFIX=$$MAJOR_VERSION
 
-KDSOAPLIB = kdsoap$$DEBUG_SUFFIX$$VERSION_SUFFIX
-KDSOAPSERVERLIB = kdsoap-server$$DEBUG_SUFFIX$$VERSION_SUFFIX
+KDSOAPLIB = kdsoap$$VERSION_SUFFIX$$DEBUG_SUFFIX
+KDSOAPSERVERLIB = kdsoap-server$$VERSION_SUFFIX$$DEBUG_SUFFIX
 
 
 message(Install prefix is $$INSTALL_PREFIX)
@@ -84,7 +84,7 @@ TMP_SOURCE_DIR = $${PWD}
 TMP_BUILD_DIR = $${OUT_PWD}
 system('echo TOP_SOURCE_DIR=$${TMP_SOURCE_DIR} >> $${QMAKE_CACHE}')
 system('echo TOP_BUILD_DIR=$${TMP_BUILD_DIR} >> $${QMAKE_CACHE}')
-windows:INSTALL_PREFIX=$$replace($INSTALL_PREFIX, \\\\, /)
+windows:INSTALL_PREFIX=$$replace(INSTALL_PREFIX, \\\\, /)
 system('echo INSTALL_PREFIX=$$INSTALL_PREFIX >> $${QMAKE_CACHE}')
 system('echo KDSOAPLIB=$$KDSOAPLIB >> $${QMAKE_CACHE}')
 system('echo KDSOAPSERVERLIB=$$KDSOAPSERVERLIB >> $${QMAKE_CACHE}')

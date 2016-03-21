@@ -8,6 +8,8 @@ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII QT_NO_CAST_FROM_BYTEARRAY
 
 solaris-cc:DEFINES += SUN7
 
+win32-msvc*:DEFINES += _SCL_SECURE_NO_WARNINGS
+
 win32-msvc*:QMAKE_CXXFLAGS += /GR /EHsc /wd4251
 
 unix:!macx:QMAKE_LFLAGS += -Wl,-no-undefined
@@ -30,6 +32,10 @@ staticlib {
     win32 {
       DLLDESTDIR = $${TOP_BUILD_DIR}/bin
       CONFIG += dll
+#skip_target_version_ext was introduced in Qt5.3 so we can't use it for Qt4.8 builds
+#so fallback to setting the empty VERSION trick.
+      VERSION=
+#      CONFIG += skip_target_version_ext
     }
   }
 }
