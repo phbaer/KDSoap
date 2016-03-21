@@ -53,6 +53,20 @@ public:
     KDSoapMessage replyMessage;
     KDSoapHeaders replyHeaders;
     bool parsed;
+
+protected:
+    struct MtomXopMessage
+    {
+        QString contentId;
+        QString contentType;
+        QString charSet;
+        QByteArray body;
+    };
+
+    QList< QByteArray > extractHeaders(const QByteArray& data, QByteArray& body) const;
+    QMap< QString, QString > extractContentType(const QString &data) const;
+    bool isMtomXop(QMap< QString, QString >& contentTypeInfo) const;
+    QMap< QString, MtomXopMessage > extractMessages(const QString& boundaryMarker, const QByteArray& data) const;
 };
 
 #endif // KDSOAPPENDINGCALL_P_H
